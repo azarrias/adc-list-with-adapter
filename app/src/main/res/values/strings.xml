@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ListWithAdapter</string>
+    <string name="lbl_france">France</string>
+    <string name="lbl_cameroon">Cameroon</string>
+    <string name="lbl_angola">Angola</string>
+    <string name="lbl_italy">Italy</string>
+    <string name="lbl_germany">Germany</string>
 </resources>
