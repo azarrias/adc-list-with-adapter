@@ -16,6 +16,10 @@ public class CountryListAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final List<String> countries;
 
+    static class ViewHolder {
+        TextView tvCountryName;
+    }
+
     public CountryListAdapter(@NonNull Context context, int resource, @NonNull List<String> countries) {
         super(context, resource, countries);
         this.context = context;
@@ -25,11 +29,20 @@ public class CountryListAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.list_item, parent, false);
-        TextView tvCountry = (TextView)view.findViewById(R.id.tvCountry);
-        tvCountry.setText(this.countries.get(position));
+        View rowView = convertView;
 
-        return view;
+        if (rowView == null) {
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = inflater.inflate(R.layout.list_item, parent, false);
+
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.tvCountryName = rowView.findViewById(R.id.tvCountry);
+            rowView.setTag(viewHolder);
+        }
+
+        ViewHolder holder = (ViewHolder)rowView.getTag();
+        holder.tvCountryName.setText(this.countries.get(position));
+
+        return rowView;
     }
 }
